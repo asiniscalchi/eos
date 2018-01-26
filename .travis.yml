@@ -79,3 +79,14 @@ script:
   - ninja -j4
   - '[ "$TRAVIS_OS_NAME" == "osx" ] || ctest --output-on-failure'
   - cpack
+
+deploy:
+  - provider: releases
+    skip_cleanup: true
+    api_key:
+      secure: PpGyQ04Yi/c106VzEpX6jVoeRtQfCYq98S5cawPdamvVdwhFHO1HghDKl9BQxMpJLNt4gsEbi5K+6ooRdZgFbYVy00P88k4CwzlriUYvE6j3aJBoGCRSz5NUKOZKYFvjn8+a1ACL9ZjOdCS4Koqc9cSG/4+NI/paENS5eDZgWumlBFL+GyoZK5QNm0uXUVlfy2s8mNMbiQ6UPYwYDVcCJIO9/ItwrL7VLlhOesOnDoGSnBJqpl7TCEAmx4Y/r/YReBE25wIKgmJMb2QHBKcoVyYJ4oVJfuGcq+42YN7KeEKI+zScQfCQR+AvNfr6r+7xQCVaKZk4Otej0QfarqdLSK4Q5gLNCSS8uSLM8eKx7v8qiiTkDwCgOB+OPcmI5MOkUYE1iNOVyEZjREgnP/5hTCKx2PSEad1SBrITNL2uM3CwQrzkHluud05m//zz0ftaGduQmZXdiK4Ux2LdtEtflfS/KXH2bYU2Ok/Uc0UJSbLBsNPaJIc7Q5kSEOoE5jWGhDk8Gq2T28L4uupoXzsV1CX/Kd+/bf0wh7KlQBDk1H0JkLtaEpokty31r8+56TgnEJxdgAjoqVNBKwHxFRREjpdyfX7CFiRFaThyYT454/HHxZf1C/ZmCxG2AmWTWoxOytieVW3MAmWCZOOQ5AMmjZ9NNNYhjNA0wrLZaTstU0c=
+    file_glob: true
+    file: "packages/EOS.IO-*"
+    on:
+      tags: true
+
