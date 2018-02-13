@@ -7,6 +7,9 @@ enable_testing()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libraries/fc/CMakeModules")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
+find_package(Wasm REQUIRED)
+find_package(Binaryen REQUIRED)
+
 INCLUDE( VersionMacros )
 INCLUDE( SetupTargetMacros )
 
