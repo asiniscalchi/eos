@@ -1,62 +1,9 @@
-set(WASM_TOOLCHAIN FALSE)
+find_package(WASM REQUIRED)
+find_package(Binaryen REQUIRED)
 
-if(NOT DEFINED WASM_LLVM_CONFIG)
-  if(NOT "$ENV{WASM_LLVM_CONFIG}" STREQUAL "")
-    set(WASM_LLVM_CONFIG "$ENV{WASM_LLVM_CONFIG}" CACHE FILEPATH "Location of llvm-config compiled with WASM support.")
-  endif()
-endif()
-
-if(WASM_LLVM_CONFIG)
-  execute_process(
-    COMMAND ${WASM_LLVM_CONFIG} --bindir
-    RESULT_VARIABLE WASM_LLVM_CONFIG_OK
-    OUTPUT_VARIABLE WASM_LLVM_BIN
-  )
-
-  if("${WASM_LLVM_CONFIG_OK}" STREQUAL "0")
-    string(STRIP "${WASM_LLVM_BIN}" WASM_LLVM_BIN)
-    set(WASM_CLANG ${WASM_LLVM_BIN}/clang)
-    set(WASM_LLC ${WASM_LLVM_BIN}/llc)
-    set(WASM_LLVM_LINK ${WASM_LLVM_BIN}/llvm-link)
-  endif()
-
-else()
-  set(WASM_CLANG $ENV{WASM_CLANG})
-  set(WASM_LLC $ENV{WASM_LLC})
-  set(WASM_LLVM_LINK $ENV{WASM_LLVM_LINK})
-endif()
-
-if( NOT ("${WASM_CLANG}" STREQUAL "" OR "${WASM_LLC}" STREQUAL "" OR "${WASM_LLVM_LINK}" STREQUAL "") )
-  if( NOT "${BINARYEN_ROOT}" STREQUAL "" )
-
-    if(EXISTS "${BINARYEN_ROOT}/bin/s2wasm")
-
-      set(BINARYEN_BIN ${BINARYEN_ROOT}/bin)
-
-    endif()
-
-  else()
-
-    message(STATUS "BINARYEN_BIN not defined looking in PATH")
-    find_path(BINARYEN_BIN
-              NAMES s2wasm
-              ENV PATH )
-    if (BINARYEN_BIN AND NOT EXISTS ${BINARYEN_ROOT}/s2wasm)
-
-      unset(BINARYEN_BIN)
-
-    endif()
-
-  endif()
-
-  message(STATUS "BINARYEN_BIN => " ${BINARYEN_BIN})
-
-endif()
-
-# TODO: Check if compiler is able to generate wasm32
-if( NOT ("${WASM_CLANG}" STREQUAL "" OR "${WASM_LLC}" STREQUAL "" OR "${WASM_LLVM_LINK}" STREQUAL "" OR NOT BINARYEN_BIN) )
-  set(WASM_TOOLCHAIN TRUE)
-endif()
+message(STATUS "Found WASM clang: " ${WASM_CLANG})
+message(STATUS "Found WASM llc: " ${WASM_LLC})
+message(STATUS "Found WASM llvm-link: " ${WASM_LLVM_LINK})
 
 macro(compile_wast)
   cmake_parse_arguments(ARG "" "TARGET" "SOURCE_FILES;INCLUDE_FOLDERS" ${ARGN})

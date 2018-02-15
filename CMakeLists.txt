@@ -7,9 +7,6 @@ enable_testing()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libraries/fc/CMakeModules")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
-find_package(Wasm REQUIRED)
-find_package(Binaryen REQUIRED)
-
 INCLUDE( VersionMacros )
 INCLUDE( SetupTargetMacros )
 
@@ -169,17 +166,9 @@ if(ENABLE_COVERAGE_TESTING)
 endif()
 
 include(wasm)
-if(WASM_TOOLCHAIN)
-  message(STATUS "Using WASM clang => " ${WASM_CLANG})
-  message(STATUS "Using WASM llc => " ${WASM_LLC})
-  message(STATUS "Using WASM llvm-link => " ${WASM_LLVM_LINK})
-  add_subdirectory(contracts)
-else()
-  message( FATAL_ERROR "No WASM compiler cound be found" )
-endif()
-
 include(installer)
 
+add_subdirectory( contracts )
 add_subdirectory( libraries )
 add_subdirectory( plugins )
 add_subdirectory( programs )
