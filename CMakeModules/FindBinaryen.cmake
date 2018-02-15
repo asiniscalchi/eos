@@ -2,7 +2,7 @@
 # Once done this will define
 #  BINARYEN_FOUND - System has BINARYEN
 
-find_file(BINARYEN_BIN s2wasm HINTS ${BINARYEN_ROOT}/bin)
+find_program(BINARYEN_BIN s2wasm HINTS ${BINARYEN_ROOT}/bin)
 
 include(FindPackageHandleStandardArgs)
 # handle the QUIETLY and REQUIRED arguments and set BINARYEN_FOUND to TRUE
