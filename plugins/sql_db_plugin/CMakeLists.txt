@@ -24,5 +24,7 @@ target_link_libraries(sql_db_plugin
     ${SOCI_LIBRARY}
     )
 
+add_subdirectory(mongodb)
+
 add_subdirectory(test)
 
