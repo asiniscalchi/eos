@@ -12,7 +12,7 @@
 namespace eosio {
 namespace soci {
 
-class irreversible_block_storage : public consumer_core<chain::block_state_ptr>
+class block_consumer : public consumer_core<chain::block_state_ptr>
 {
 public:
     void consume(const std::vector<chain::block_state_ptr>& blocks) override;
@@ -20,4 +20,3 @@ public:
 
 } // namespace soci
 } // namespace eosio
-

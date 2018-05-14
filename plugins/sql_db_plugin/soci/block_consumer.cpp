@@ -1,9 +1,9 @@
-#include "block_storage.h"
+#include "block_consumer.h"
 
 namespace eosio {
 namespace soci {
 
-void block_storage::consume(const std::vector<chain::block_state_ptr> &blocks)
+void block_consumer::consume(const std::vector<chain::block_state_ptr> &blocks)
 {
     for (auto block : blocks)
         ilog(block->id.str());

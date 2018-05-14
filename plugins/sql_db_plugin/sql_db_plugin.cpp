@@ -8,8 +8,8 @@
 #include "database.h"
 
 #include "consumer_core.h"
-#include "soci/irreversible_block_storage.h"
-#include "soci/block_storage.h"
+#include "soci/irreversible_block_consumer.h"
+#include "soci/block_consumer.h"
 #include "mongodb/irreversible_block_consumer.h"
 
 namespace {
@@ -26,8 +26,8 @@ namespace eosio {
 static appbase::abstract_plugin& _sql_db_plugin = app().register_plugin<sql_db_plugin>();
 
 sql_db_plugin::sql_db_plugin():
-    m_irreversible_block_consumer(std::make_unique<soci::irreversible_block_storage>()),
-    m_block_consumer(std::make_unique<soci::block_storage>())
+    m_irreversible_block_consumer(std::make_unique<soci::irreversible_block_consumer>()),
+    m_block_consumer(std::make_unique<soci::block_consumer>())
 {
 
 }
