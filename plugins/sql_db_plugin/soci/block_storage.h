@@ -10,6 +10,7 @@
 #include <eosio/chain/block_state.hpp>
 
 namespace eosio {
+namespace soci {
 
 class block_storage : public consumer_core<chain::block_state_ptr>
 {
@@ -17,4 +18,5 @@ public:
     void consume(const std::vector<chain::block_state_ptr>& blocks) override;
 };
 
-} // namespace
+} // namespace soci
+} // namespace eosio

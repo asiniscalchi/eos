@@ -26,8 +26,8 @@ namespace eosio {
 static appbase::abstract_plugin& _sql_db_plugin = app().register_plugin<sql_db_plugin>();
 
 sql_db_plugin::sql_db_plugin():
-    m_irreversible_block_consumer(std::make_unique<irreversible_block_storage>()),
-    m_block_consumer(std::make_unique<block_storage>())
+    m_irreversible_block_consumer(std::make_unique<soci::irreversible_block_storage>()),
+    m_block_consumer(std::make_unique<soci::block_storage>())
 {
 
 }

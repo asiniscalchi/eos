@@ -1,6 +1,7 @@
 #include "irreversible_block_storage.h"
 
 namespace eosio {
+namespace soci {
 
 void irreversible_block_storage::consume(const std::vector<chain::block_state_ptr>& blocks)
 {
@@ -8,4 +9,5 @@ void irreversible_block_storage::consume(const std::vector<chain::block_state_pt
         ilog(block->id.str());
 }
 
-} // namespace
+} // namespace soci
+} // namespace eosio

@@ -10,6 +10,7 @@
 #include <eosio/chain/block_state.hpp>
 
 namespace eosio {
+namespace mongodb {
 
 class irreversible_block_consumer : public consumer_core<chain::block_state_ptr>
 {
@@ -17,5 +18,6 @@ public:
     void consume(const std::vector<chain::block_state_ptr>& blocks) override;
 };
 
-} // namespace
+} // namespace mongodb
+} // namespace eosio
 
