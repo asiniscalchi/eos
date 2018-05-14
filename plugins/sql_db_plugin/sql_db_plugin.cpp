@@ -8,8 +8,8 @@
 #include "database.h"
 
 #include "consumer_core.h"
-#include "irreversible_block_storage.h"
-#include "block_storage.h"
+#include "soci/irreversible_block_storage.h"
+#include "soci/block_storage.h"
 #include "mongodb/irreversible_block_consumer.h"
 
 namespace {
