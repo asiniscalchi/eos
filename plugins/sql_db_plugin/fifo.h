@@ -10,17 +10,18 @@
 #include <atomic>
 #include <deque>
 #include <vector>
-#include <boost/noncopyable.hpp>
 
 namespace eosio {
 
 template<typename T>
-class fifo : public boost::noncopyable
+class fifo
 {
 public:
     enum class behavior {blocking, not_blocking};
 
     fifo(behavior value);
+    fifo(const fifo<T>&) = delete;
+    fifo<T>& operator=(const fifo<T>&) = delete;
 
     void push(const T& element);
     std::vector<T> pop_all();

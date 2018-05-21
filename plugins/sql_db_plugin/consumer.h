@@ -8,7 +8,6 @@
 #include <thread>
 #include <atomic>
 #include <vector>
-#include <boost/noncopyable.hpp>
 #include <fc/log/logger.hpp>
 
 #include "consumer_core.h"
@@ -17,11 +16,13 @@
 namespace eosio {
 
 template<typename T>
-class consumer final : public boost::noncopyable
+class consumer final
 {
 public:
     consumer(std::unique_ptr<consumer_core<T>> core);
+    consumer(const consumer<T>&) = delete;
     ~consumer();
+    consumer<T>& operator=(const consumer<T>&) = delete;
 
     void push(const T& element);
 
