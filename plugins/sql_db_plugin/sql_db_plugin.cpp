@@ -59,7 +59,7 @@ void sql_db_plugin::plugin_initialize(const variables_map& options)
 
 
     if (options.at(RESYNC_OPTION).as<bool>() ||
-         options.at(REPLAY_OPTION).as<bool>())
+         options.at(REPLAY_OPTION).as<bool>()) // TODO: check accounts table is empty (new chain)
     {
         ilog("Resync requested: wiping database");
         db->wipe();
